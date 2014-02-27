@@ -5,12 +5,13 @@ By @blopker
 
 from .lib.concurrent import futures
 from . import logger
+from . import settings
 log = logger.get(__name__)
 import time
 import sublime
 
 statusPool = futures.ThreadPoolExecutor(max_workers=1)
-PLUGIN_NAME = 'Color Switch'
+PLUGIN_NAME = settings.plugin_name
 # Default status display time in seconds
 TIMEOUT = 10
 current_message = None
@@ -36,7 +37,7 @@ def error(msg, seconds=TIMEOUT):
 
 def loading(msg, seconds=TIMEOUT):
     # longer time out for loading cus it could be a while.
-    return Loader(msg, seconds*2)
+    return Loader(msg, seconds * 2)
 
 
 class Message(object):

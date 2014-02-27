@@ -1,17 +1,17 @@
 '''
-Global settings module for Color Switch
+Global settings module
 By @blopker
 '''
 import sublime
 import os
 
-plugin_name = 'ColorSwitch'
+plugin_name = 'Colorsublime'
 FOLDER_REL = 'Packages/User/' + plugin_name
 FOLDER_THEMES_REL = FOLDER_REL + '/themes'
 FOLDER_ABS = None
 FOLDER_THEMES_ABS = None
 
-PLUGIN_PREF = 'ColorSwitch.sublime-settings'
+PLUGIN_PREF = plugin_name + '.sublime-settings'
 SUBLIME_PREF = 'Preferences.sublime-settings'
 
 pluginObj = {}

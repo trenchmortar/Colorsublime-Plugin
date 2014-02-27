@@ -1,9 +1,9 @@
 Colorsublime Plugin
 ===================
 
-Plugin for [Color Sublime](http://colorsublime.com/)
-
 Change themes quickly and easily, right from Sublime Text.
+
+Official [Colorsublime](http://colorsublime.com/) plugin.
 
 Dedicated to [Kim](https://github.com/kimeberz) :heart:
 
@@ -13,7 +13,7 @@ Requirements
 
 Installing
 ----------
-### With Package Control
+### With Package Control (recommended)
 1. Install [Package Control](https://sublime.wbond.net/installation)
 2. Run “Package Control: Install Package” command
 3. Find and install the `Colorsublime` plugin.

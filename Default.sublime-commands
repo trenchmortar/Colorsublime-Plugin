@@ -1,6 +1,6 @@
 [
     {
-        "caption": "Color Switch: Install Scheme",
-        "command": "color_switch_install_scheme"
+        "caption": "Colorsublime: Install Theme",
+        "command": "colorsublime_install_theme"
     }
 ]

@@ -1,5 +1,5 @@
 '''
-Abstraction for the HTTP layer.
+Public API for the HTTP layer.
 By @blopker
 '''
 from .cache import cache

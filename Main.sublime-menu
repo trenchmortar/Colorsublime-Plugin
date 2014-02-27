@@ -12,20 +12,20 @@
                 "children":
                 [
                     {
-                        "caption": "Color Switch",
+                        "caption": "Colorsublime",
                         "children":
                         [
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/ColorSwitch/ColorSwitch.sublime-settings"
+                                    "file": "${packages}/Colorsublime/Colorsublime.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/User/ColorSwitch.sublime-settings"
+                                    "file": "${packages}/User/Colorsublime.sublime-settings"
                                 },
                                 "caption": "Settings – User"
                             }

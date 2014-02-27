@@ -3,7 +3,8 @@ import time
 
 
 def cache(fn):
-    ''' A decorator to cache method invocation.
+    '''
+    A decorator to cache method invocation.
     Cache expires after a set time.
     '''
     cacheDB = {}
