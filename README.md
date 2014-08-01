@@ -33,6 +33,12 @@ The "Packages" directory is located at:
 
 * Windows: `%APPDATA%\Sublime Text 3\Packages\`
 
+Usage
+-----
+1. Press `ctl+shift+p` or `⇧⌘p` to open up Sublime Text's command menu
+2. Select Colorsublime: Install Theme
+3. Use the arrow keys to run through the themes and see your current tab change in realtime!
+
 Functions
 ---------
 * Install: Installs/Previews themes from the Colorsublime repository.
