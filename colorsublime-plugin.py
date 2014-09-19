@@ -1,9 +1,19 @@
+import imp
+import sys
+
+import sublime_plugin
+
 from .colorsublime import commands
 from .colorsublime import status
 from . import colorsublime
-import sublime_plugin
 
 NO_SELECTION = -1
+
+# Make sure all dependencies are reloaded on upgrade
+reloader_path = 'Colorsublime.colorsublime.reloader'
+if reloader_path in sys.modules:
+    imp.reload(sys.modules[reloader_path])
+from .colorsublime import reloader
 
 
 class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):

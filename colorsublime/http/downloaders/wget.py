@@ -6,9 +6,11 @@ import subprocess
 import json
 import shutil
 
+from ... import settings
+
 
 def is_available():
-    if shutil.which('wget'):
+    if settings.platform() != 'windows' and shutil.which('wget'):
         return True
     return False
 

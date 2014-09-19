@@ -1,55 +1,42 @@
 '''
-Wrapper of the python logging module for Sublime Text plugins.
+Logging module for Sublime Text plugins. Tries to emulate normal Python logger.
 by @blopker
 '''
-import logging
-from logging import StreamHandler, Formatter
-
-log = False
+from . import settings
 
 
-def init(name, debug=True):
-    ''' Initializes the named logger for the rest of this program's execution.
-    All children loggers will assume this loggers's log level if theirs is not
-    set. Suggestion: Put logger.init(__name__, debug) in the top __init__.py
-    module of your package.'''
+class Logger(object):
+    def __init__(self, name):
+        self.name = name
 
-    global log
+    def debug(self, *messages):
+        if not settings.get('debug'):
+            return
+        self._out('DEBUG', *messages)
 
-    if log:
-        # Logger already initialized.
-        return
+    def info(self, *messages):
+        self._out('INFO', *messages)
 
-    log = logging.getLogger(name)
-    handler = StreamHandler()
+    def error(self, *messages):
+        self._out('ERROR', *messages)
 
-    plugin_name = name.split('.')[0]
+    def warning(self, *messages):
+        self._out('WARN', *messages)
 
-    if debug:
-        log.setLevel(logging.DEBUG)
-        handler.setFormatter(_getDebugFmt(plugin_name))
-    else:
-        log.setLevel(logging.INFO)
-        handler.setFormatter(_getFmt(plugin_name))
+    def _out(self, level, *messages):
+        if not messages:
+            return
 
-    log.addHandler(handler)
+        if len(messages) > 1:
+            message = messages[0] % tuple(messages[1:])
+        else:
+            message = messages[0]
 
-    # Not shown if debug=False
-    log.debug("Logger for %s initialized.", plugin_name)
-
-
-def _getDebugFmt(name):
-    fmt = '%(levelname)s:' + name + '.%(module)s:%(lineno)d: %(message)s'
-    return Formatter(fmt=fmt)
-
-
-def _getFmt(plugin_name):
-    fmt = plugin_name + ': %(message)s'
-    return Formatter(fmt=fmt)
+        print('{level}:{name}:{message}'.format(level=level,
+            name=self.name, message=message))
 
 
 def get(name):
     ''' Get a new named logger. Usually called like: logger.get(__name__).Short
-    and sweet wrapper for getLogger method so you don't have to import two
-    modules.'''
-    return logging.getLogger(name)
+    and sweet '''
+    return Logger(name)
