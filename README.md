@@ -1,7 +1,7 @@
+![colorsublime](http://colorsublime.com/img/ColorSublime_logo.png)
+
 Colorsublime Plugin
 ===================
-
-![colorsublime](http://colorsublime.com/img/ColorSublime_logo.png)
 
 Change themes quickly and easily, right from Sublime Text.
 
