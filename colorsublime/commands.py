@@ -25,13 +25,17 @@ def get_current_theme():
 
 @async
 def fetch_theme_list():
-    urls = settings.get('repos', [])
+    """Iterate through repos until maybe one works"""
+    repos = settings.get('repos', [])
     themes = []
-    for url in urls:
-        if url[-1] == '/':
-            url = url[:-1]
-        json = http.get_json(url + '/themes.json')
-        themes += [Theme.from_repo(j, url) for j in json]
+    for repo in repos:
+        if repo[-1] == '/':
+            repo = repo[:-1]
+        json = http.get_json(repo + '/themes.json')
+        if not json:
+            continue
+        themes = [Theme.from_repo(j, repo) for j in json]
+        break
     return Themes(themes)
 
 

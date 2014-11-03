@@ -1,6 +1,6 @@
-'''
+"""
 Decorator to run functions asynchronously.
-'''
+"""
 import traceback
 from .lib.concurrent import futures
 from . import logger
@@ -14,7 +14,7 @@ def _is_function(fn):
 
 
 def async(fn):
-    ''' Decorator for running functions asynchronously.
+    """ Decorator for running functions asynchronously.
     Async functions can have a callback as the
     last argument. Returns False if uncaught exception.
 
@@ -31,7 +31,7 @@ def async(fn):
         return arg*2
 
     has_callback(2, callback)
-    '''
+    """
     def wrap(*args):
         callback = False
         if len(args) > 0 and _is_function(args[-1]):
@@ -55,7 +55,7 @@ def async(fn):
 
 
 def asyncMap(fn, *args):
-    ''' A method that emulates Python's built-in map(),
+    """ A method that emulates Python's built-in map(),
     but each function call is done in async.
     asyncMap() blocks until all functions have finished.
     Returns a list of results. If a function call times out
@@ -64,7 +64,7 @@ def asyncMap(fn, *args):
     e.x.
     >>> asyncMap(max, [1,3,6], [2,2,7])
     [2,3,7]
-    '''
+    """
 
     timeout = settings.get('http_timeout', 10) + 5
     calls = max([len(x) for x in args])

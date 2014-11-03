@@ -10,8 +10,9 @@
     ////////////////////////////////////
     /// Themes
     ////////////////////////////////////
-    // Theme repo URLs
-    "repos":["https://raw2.github.com/Colorsublime/Colorsublime-Themes/master/"],
+    // List of theme repo URL fallbacks
+    "repos":["https://raw2.github.com/Colorsublime/Colorsublime-Themes/master/",
+             "https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/"],
     // Names of the themes to be managed.
     "installed_themes": [],
 
