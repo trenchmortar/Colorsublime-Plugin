@@ -21,6 +21,8 @@ class UrllibDownloader(DownloaderBase):
         return SSL
 
     def get(self, url):
+        # Proxy support
+        request.install_opener(request.build_opener(request.ProxyHandler()))
         try:
             log.debug('Urllib downloader getting url %s', url)
             result = request.urlopen(url)
