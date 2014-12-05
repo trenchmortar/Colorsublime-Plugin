@@ -11,13 +11,12 @@ class Themes(list):
 
 @functools.total_ordering
 class Theme(object):
-    def __init__(self, name='', author='', description='', file_name=None, file_path=None, url=None):
+    def __init__(self, *, name, author, description, file_name, file_path):
         self.name = name
         self.author = author
         self.description = description
         self.file_name = file_name
         self.file_path = file_path
-        self.url = url
 
     def __lt__(self, other):
         return self.name.lower() < other.name.lower()
@@ -26,11 +25,11 @@ class Theme(object):
         return self.name.lower() == other.name.lower()
 
     @classmethod
-    def from_repo(cls, repo_dict, url):
+    def from_repo(cls, repo_dict, repo_path):
         r = repo_dict
-        url = '%s/themes/%s' % (url, r['FileName'])
+        file_path = repo_path + '/themes/' + r['FileName']
         return cls(name=r['Title'],
                    author=r['Author'],
                    description=r['Description'],
                    file_name=r['FileName'],
-                   url=url)
+                   file_path=file_path)

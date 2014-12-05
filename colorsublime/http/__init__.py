@@ -17,16 +17,6 @@ def get(url):
     return _run_downloader(downloader.get, url)
 
 
-@cache
-def get_json(url):
-    return _run_downloader(downloader.get_json, url)
-
-
-@cache
-def get_file(url):
-    return _run_downloader(downloader.get_file, url)
-
-
 def _run_downloader(fn, url):
     try:
         log.debug('HTTP url %s with function %s', url, fn.__name__)

@@ -24,54 +24,18 @@ def get_current_theme():
 
 
 @async
-def fetch_theme_list():
-    """Iterate through repos until maybe one works"""
-    repos = settings.get('repos', [])
-    themes = []
-    for repo in repos:
-        if repo[-1] == '/':
-            repo = repo[:-1]
-        json = http.get_json(repo + '/themes.json')
-        if not json:
-            continue
-        themes = [Theme.from_repo(j, repo) for j in json]
-        break
+def fetch_themes():
+    """ Get current theme archive """
+    repo = settings.get('repo')
+    archive = http.get(repo)
+    cache_path = settings.get_cache_path()
+    io.extract(archive, cache_path)
+    json = io.read_json(cache_path, 'themes.json')
+    themes = [Theme.from_repo(j, cache_path) for j in json]
     return Themes(themes)
-
-
-@async
-def get_theme(theme):
-    return _get_theme(theme)
-
-
-def _get_theme(theme):
-    theme.file_path = io.get_theme_path(theme.file_name)
-    if theme.file_path:
-        return theme
-
-    data = http.get_file(theme.url)
-
-    if not data:
-        return theme
-
-    # Sanity check
-    if '<plist version=' not in str(data):
-        return theme
-
-    theme.file_path = io.save_theme(data, theme.file_name)
-    return theme
 
 
 def set_theme(theme, commit=False):
     settings.set_color_scheme(theme.file_path)
     if commit:
         settings.save_user()
-
-
-@async
-def install_theme(theme):
-    theme = _get_theme(theme)
-    if theme.file_path is None:
-        return None
-    set_theme(theme, commit=True)
-    return theme

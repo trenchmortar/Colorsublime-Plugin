@@ -22,7 +22,7 @@ class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
         self.theme_status = {}
         self.status = status.loading('Getting Theme list')
         self.original_theme = commands.get_current_theme()
-        commands.fetch_theme_list(self.display_list)
+        commands.fetch_themes(self.display_list)
 
     def display_list(self, themes):
         self.status.stop()
@@ -37,40 +37,17 @@ class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
                                      on_highlight=self.on_highlighted)
 
     def on_highlighted(self, theme_index):
-        theme = self.themes[theme_index]
-        self.theme_status[theme.name] = status.loading('Downloading Theme %s' % theme.name)
-        self.current_theme = theme
-        commands.get_theme(self.themes[theme_index], self.on_get)
-
-    def on_get(self, theme):
-        self.theme_status[theme.name].stop()
-        if not theme.file_path:
-            status.error('Theme %s download failed.' % theme.name)
-            return
-        # Don't set if user has moved on already
-        if theme.file_name == self.current_theme.file_name:
-            status.message('Showing Theme %s.' % theme.name)
-            commands.set_theme(theme)
+        commands.set_theme(self.themes[theme_index])
 
     def on_select(self, theme_index):
         if theme_index is NO_SELECTION:
             commands.set_theme(self.original_theme)
-            status.message('Theme install canceled.')
+            status.message('Theme selection canceled.')
             return
+
         theme = self.themes[theme_index]
-        status.message('Installing Theme %s' % theme.name)
-        commands.install_theme(theme, self.install_done)
-
-    def install_done(self, theme):
-        self.status.stop()
-
-        if theme is None:
-            commands.set_theme(self.original_theme)
-            status.error('Theme install was unsuccessful. Please check console.')
-            return
-
-        commands.set_theme(theme)
-        status.message('Theme installed successfully!')
+        commands.set_theme(theme, commit=True)
+        status.message('Theme %s installed successfully!' % theme.name)
 
 
 def plugin_loaded():
