@@ -5,7 +5,6 @@ import sublime_plugin
 
 from .colorsublime import commands
 from .colorsublime import status
-from . import colorsublime
 
 NO_SELECTION = -1
 
@@ -14,6 +13,7 @@ reloader_path = 'Colorsublime.colorsublime.reloader'
 if reloader_path in sys.modules:
     imp.reload(sys.modules[reloader_path])
 from .colorsublime import reloader
+reloader.reload()
 
 
 class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
@@ -21,8 +21,7 @@ class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
         print('Running install command.')
         self.theme_status = {}
         self.status = status.loading('Getting Theme list')
-        self.original_theme = commands.get_current_theme()
-        commands.fetch_themes(self.display_list)
+        commands.fetch_repo(self.display_list)
 
     def display_list(self, themes):
         self.status.stop()
@@ -31,24 +30,28 @@ class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
                          'connection or enable debug in the settings and ' +
                          'report the stack traces.')
             return
+
         self.themes = themes
-        self.window.show_quick_panel(themes.quick_list(),
+        self.initial_theme = commands.get_current_theme()
+
+        quick_list = [[theme.name,
+                       theme.author,
+                       theme.description] for theme in self.themes]
+        quick_list.sort()
+
+        self.window.show_quick_panel(quick_list,
                                      self.on_select,
                                      on_highlight=self.on_highlighted)
 
     def on_highlighted(self, theme_index):
-        commands.set_theme(self.themes[theme_index])
+        commands.preview_theme(self.themes[theme_index])
 
     def on_select(self, theme_index):
         if theme_index is NO_SELECTION:
-            commands.set_theme(self.original_theme)
-            status.message('Theme selection canceled.')
+            commands.revert_theme(self.initial_theme)
+            status.message('Theme selection cancelled.')
             return
 
         theme = self.themes[theme_index]
-        commands.set_theme(theme, commit=True)
-        status.message('Theme %s installed successfully!' % theme.name)
-
-
-def plugin_loaded():
-    colorsublime.init()
+        commands.install_theme(theme)
+        status.message('Theme %s installed!' % theme.name)

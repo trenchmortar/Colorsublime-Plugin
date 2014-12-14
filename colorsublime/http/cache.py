@@ -3,26 +3,18 @@ import time
 
 
 def cache(fn):
-    '''
+    """
     A decorator to cache method invocation.
     Cache expires after a set time.
-    '''
+    """
     cacheDB = {}
 
     def putCache(args, ans):
-        # Disable cache for debug.
-        if settings.isDebug():
-            return
-
         if ans:
             cacheDB[args] = (time.time(), ans)
 
     def getCache(args):
-        # Disable cache for debug.
-        if settings.isDebug():
-            return False
-
-        # Get result while cleaning old cache.
+        # Super slow, ghetto-fab cache
         t = time.time()
         cache_time = settings.get('cache_time', 0)
         ans = False
@@ -30,9 +22,12 @@ def cache(fn):
 
         for c in cacheDB:
             age = t - cacheDB[c][0]
+
+            # Mark stale objects for cleaning
             if age > cache_time:
                 to_remove.append(c)
                 continue
+
             if c == args:
                 ans = cacheDB[args][1]
 
@@ -42,6 +37,10 @@ def cache(fn):
         return ans
 
     def wrap(*args):
+        # Disable cache for debug.
+        if settings.is_debug():
+            return fn(*args)
+
         ans = getCache(args)
         if ans is False:
             ans = fn(*args)

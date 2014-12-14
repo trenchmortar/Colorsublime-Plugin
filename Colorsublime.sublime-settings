@@ -11,24 +11,24 @@
     /// Themes
     ////////////////////////////////////////////////////////////////////////
     // Theme repo URL
-    "repo":"https://github.com/Colorsublime/Colorsublime-Themes/archive/master.zip",
+    "repo_url":"https://github.com/Colorsublime/Colorsublime-Themes/archive/master.zip",
 
     ////////////////////////////////////////////////////////////////////////
     /// Paths
     ////////////////////////////////////////////////////////////////////////
     // Paths are relative to your 'Browse Packages...' folder.
-    // Absolute paths are allowed.
+    // Absolute paths are not allowed. Use '/', even on Windows.
     ////////////////////////////////////////////////////////////////////////
-    // Where to store cached themes.
-    "cache_folder": "User/Colorsublime.cache",
+    // Where to store cached files.
+    "cache_path": "Colorsublime - Themes/cache",
     // Where to put installed themes.
-    "install_folder": "User/Colorsublime",
+    "install_path": "Colorsublime - Themes",
 
     ////////////////////////////////////////////////////////////////////////
     /// HTTP
     ////////////////////////////////////////////////////////////////////////
-    // Amount of time to cache HTTP requests in seconds.
-    "cache_time": 1000,
+    // Amount of time to cache HTTP requests in seconds. (Default: 1 day)
+    "cache_time": 86400,
     // HTTP timeout in seconds
     "http_timeout": 10
 }

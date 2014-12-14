@@ -19,14 +19,13 @@ mods_load_order = [
     'io',
     'settings',
     'status',
-
-    'repository',
-    'repository.themes',
+    'theme',
 
     'http',
     'http.cache',
     'http.downloaders',
     'http.downloaders.downloader_base',
+    'http.downloaders.external',
     'http.downloaders.curl',
     'http.downloaders.urllib',
     'http.downloaders.wget',
@@ -34,7 +33,9 @@ mods_load_order = [
 
 mods_load_order = [parent + '.' + mod for mod in mods_load_order]
 
-log.debug('reloading')
-for mod in mods_load_order:
-    if mod in reload_mods:
-        imp.reload(sys.modules[mod])
+
+def reload():
+    log.debug('reloading')
+    for mod in mods_load_order:
+        if mod in reload_mods:
+            imp.reload(sys.modules[mod])

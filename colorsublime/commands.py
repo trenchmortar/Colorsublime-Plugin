@@ -1,4 +1,4 @@
-'''
+"""
 Collection of functions the plugin can invoke. Most if not all should be
 non-blocking (@async) functions to keep the main UI thread from freezing.
 
@@ -7,7 +7,7 @@ have to. Unexpected exceptions should return False. Expected exceptions should
 be caught by other modules this module uses. Log all unusual behavior.
 
 All @async functions have an optional callback parameter as the last argument.
-'''
+"""
 
 from . import logger
 log = logger.get(__name__)
@@ -15,27 +15,35 @@ from . import settings
 from . import http
 from . import io
 from .async import async
-from .repository import Theme, Themes
+from .theme import Theme
 
 
 def get_current_theme():
-    current_path = settings.get_color_scheme()
-    return Theme(file_path=current_path)
+    return settings.get_current_theme()
 
 
 @async
-def fetch_themes():
+def fetch_repo():
     """ Get current theme archive """
-    repo = settings.get('repo')
-    archive = http.get(repo)
-    cache_path = settings.get_cache_path()
-    io.extract(archive, cache_path)
-    json = io.read_json(cache_path, 'themes.json')
-    themes = [Theme.from_repo(j, cache_path) for j in json]
-    return Themes(themes)
+    archive = http.get(settings.repo_url())
+    io.extract(archive, settings.cache_path())
+    themes_list = io.read_json(settings.themes_list_path())
+    themes = [Theme.from_json(theme) for theme in themes_list]
+    return themes
 
 
-def set_theme(theme, commit=False):
-    settings.set_color_scheme(theme.file_path)
-    if commit:
-        settings.save_user()
+def preview_theme(theme):
+    log.debug('Previewing theme %s at %s', theme.name, theme.cache_path.abs)
+    settings.set_theme(theme.cache_path.rel)
+
+
+def install_theme(theme):
+    log.debug('Installing theme %s to %s', theme.name, theme.install_path.abs)
+    io.copy(theme.cache_path.abs, theme.install_path.abs)
+    settings.set_theme(theme.install_path.rel)
+    settings.commit()
+
+
+def revert_theme(path):
+    log.debug('Reverting theme at path %s', path)
+    settings.set_theme(path)
