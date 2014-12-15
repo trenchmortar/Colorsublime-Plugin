@@ -8,6 +8,7 @@ be caught by other modules this module uses. Log all unusual behavior.
 
 All @async functions have an optional callback parameter as the last argument.
 """
+import os
 
 from . import logger
 log = logger.get(__name__)
@@ -34,12 +35,20 @@ def fetch_repo():
 
 def preview_theme(theme):
     log.debug('Previewing theme %s at %s', theme.name, theme.cache_path.abs)
+
+    if not os.path.exists(theme.cache_path.abs):
+        return
+
     settings.set_theme(theme.cache_path.rel)
 
 
 def install_theme(theme):
     log.debug('Installing theme %s to %s', theme.name, theme.install_path.abs)
     io.copy(theme.cache_path.abs, theme.install_path.abs)
+
+    if not os.path.exists(theme.cache_path.abs):
+        return
+
     settings.set_theme(theme.install_path.rel)
     settings.commit()
 
