@@ -27,7 +27,7 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
         self.status.stop()
         if not themes:
             status.error('Theme list not found. Please check internet ' +
-                         'connection or enable debug in the settings and ' +
+                         'connection or enable debug in settings and ' +
                          'report the stack traces.')
             return
 
