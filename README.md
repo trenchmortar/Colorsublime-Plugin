@@ -26,7 +26,6 @@ Clone the repository in your Sublime Text "Packages" directory:
 
     git clone https://github.com/Colorsublime/Colorsublime-Plugin.git
 
-
 The "Packages" directory is located at:
 
 * OS X: `~/Library/Application Support/Sublime Text 3/Packages/`
