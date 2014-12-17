@@ -1,6 +1,10 @@
 [
     {
         "caption": "Colorsublime: Install Theme",
-        "command": "colorsublime_install_theme"
+        "command": "install_theme"
+    },
+    {
+        "caption": "Colorsublime: Browse Themes",
+        "command": "browse"
     }
 ]

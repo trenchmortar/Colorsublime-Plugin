@@ -16,7 +16,7 @@ from .colorsublime import reloader
 reloader.reload()
 
 
-class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
+class InstallThemeCommand(sublime_plugin.WindowCommand):
     def run(self):
         print('Running install command.')
         self.theme_status = {}
@@ -55,3 +55,8 @@ class ColorsublimeInstallThemeCommand(sublime_plugin.WindowCommand):
         theme = self.themes[theme_index]
         commands.install_theme(theme)
         status.message('Theme %s installed!' % theme.name)
+
+
+class BrowseCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        self.window.run_command('open_url', {'url': 'http://colorsublime.com'})
