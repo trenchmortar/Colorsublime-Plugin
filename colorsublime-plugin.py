@@ -40,13 +40,13 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
         quick_list.sort()
 
         self.window.show_quick_panel(quick_list,
-                                     self.on_select,
+                                     self.on_done,
                                      on_highlight=self.on_highlighted)
 
     def on_highlighted(self, theme_index):
         commands.preview_theme(self.themes[theme_index])
 
-    def on_select(self, theme_index):
+    def on_done(self, theme_index):
         if theme_index is NO_SELECTION:
             commands.revert_theme(self.initial_theme)
             status.message('Theme selection cancelled.')
