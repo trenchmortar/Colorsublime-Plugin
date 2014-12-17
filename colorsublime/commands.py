@@ -25,7 +25,7 @@ def get_current_theme():
 
 @async
 def fetch_repo():
-    """ Get current theme archive """
+    """ Get current theme archive in a new thread """
     archive = http.get(settings.repo_url())
     io.extract(archive, settings.cache_path())
     themes_list = io.read_json(settings.themes_list_path())
@@ -33,10 +33,17 @@ def fetch_repo():
     return themes
 
 
+def _exists(theme):
+    if not os.path.exists(theme.cache_path.abs):
+        log.error('Path %s not found!', theme.cache_path.abs)
+        return False
+    return True
+
+
 def preview_theme(theme):
     log.debug('Previewing theme %s at %s', theme.name, theme.cache_path.abs)
 
-    if not os.path.exists(theme.cache_path.abs):
+    if not _exists(theme):
         return
 
     settings.set_theme(theme.cache_path.rel)
@@ -44,11 +51,11 @@ def preview_theme(theme):
 
 def install_theme(theme):
     log.debug('Installing theme %s to %s', theme.name, theme.install_path.abs)
-    io.copy(theme.cache_path.abs, theme.install_path.abs)
 
-    if not os.path.exists(theme.cache_path.abs):
+    if not _exists(theme):
         return
 
+    io.copy(theme.cache_path.abs, theme.install_path.abs)
     settings.set_theme(theme.install_path.rel)
     settings.commit()
 
