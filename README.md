@@ -36,7 +36,7 @@ The "Packages" directory is located at:
 
 Usage
 -----
-1. Press `ctl+shift+p` or `⇧⌘p` to open up Sublime Text's command menu
+1. Press `ctl+shift+p` (Windows/Linux) or `⇧+⌘+p` (OSX) to open up Sublime Text's command menu
 2. Select `Colorsublime: Install Theme`
 3. Use the arrow keys to run through the themes and see your current tab change in realtime!
 
