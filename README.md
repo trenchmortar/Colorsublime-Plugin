@@ -19,7 +19,7 @@ Installing
 1. Install [Package Control](https://sublime.wbond.net/installation)
 2. Run “Package Control: Install Package” command
 3. Find and install the `Colorsublime` plugin.
-4. Restart Sublime Text if it doesn't work.
+4. Restart Sublime Text if there are issues.
 
 ### Manually
 Clone the repository in your Sublime Text "Packages" directory:
@@ -44,3 +44,4 @@ Usage
 Functions
 ---------
 * Install: Installs/Previews themes from the Colorsublime repository.
+* Browse: Takes you to Colorsublime.com
