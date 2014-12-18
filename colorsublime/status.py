@@ -1,14 +1,17 @@
-'''
+# -*- coding: utf-8 -*-
+"""
 Module to set the view status of Sublime Text plugins.
 By @blopker
-'''
+"""
+import random
+import time
+
+import sublime
 
 from .lib.concurrent import futures
 from . import logger
 from . import settings
 log = logger.get(__name__)
-import time
-import sublime
 
 statusPool = futures.ThreadPoolExecutor(max_workers=1)
 PLUGIN_NAME = settings.plugin_name
@@ -41,8 +44,8 @@ def loading(msg, seconds=TIMEOUT):
 
 
 class Message(object):
-    '''Class to start and cancel the status message.
-    Call stop() on this object to remove the message.'''
+    """ Class to start and cancel the status message.
+    Call stop() on this object to remove the message."""
     def __init__(self, message, timeout):
         self.message = message
         self.running = True
@@ -85,11 +88,12 @@ class Message(object):
 
 
 class Loader(Message):
+    chars = u'⣾⣽⣻⢿⡿⣟⣯⣷'
+
     def _get_message(self):
-        pos = getattr(self, 'pos', 0)
-        loadingChars = '⣾⣽⣻⢿⡿⣟⣯⣷'
-        msg = self.message + ' [' + loadingChars[pos] + ']'
-        self.pos = (pos + 3) % len(loadingChars)
+        mod = len(self.chars)
+        rands = [self.chars[x % mod] for x in random.sample(range(100), 10)]
+        msg = self.message + ' [' + ''.join(rands) + '] '
         return msg
 
     def stop(self):
