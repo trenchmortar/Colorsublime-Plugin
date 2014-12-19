@@ -36,15 +36,16 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
 
         quick_list = [[theme.name,
                        theme.author,
-                       theme.description] for theme in self.themes]
+                       theme.description] for theme in self.themes.values()]
         quick_list.sort()
+        self.quick_list = quick_list
 
         self.window.show_quick_panel(quick_list,
                                      self.on_done,
                                      on_highlight=self.on_highlighted)
 
     def on_highlighted(self, theme_index):
-        commands.preview_theme(self.themes[theme_index])
+        commands.preview_theme(self._quick_list_to_theme(theme_index))
 
     def on_done(self, theme_index):
         if theme_index is NO_SELECTION:
@@ -52,9 +53,12 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
             status.message('Theme selection cancelled.')
             return
 
-        theme = self.themes[theme_index]
+        theme = self._quick_list_to_theme(theme_index)
         commands.install_theme(theme)
         status.message('Theme %s installed!' % theme.name)
+
+    def _quick_list_to_theme(self, index):
+        return self.themes[self.quick_list[index][0]]
 
 
 class BrowseCommand(sublime_plugin.WindowCommand):

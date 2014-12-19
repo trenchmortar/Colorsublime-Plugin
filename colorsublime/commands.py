@@ -30,6 +30,7 @@ def fetch_repo():
     io.extract(archive, settings.cache_path())
     themes_list = io.read_json(settings.themes_list_path())
     themes = [Theme.from_json(theme) for theme in themes_list]
+    themes = {t.name: t for t in themes}
     return themes
 
 

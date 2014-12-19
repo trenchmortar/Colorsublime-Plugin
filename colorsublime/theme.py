@@ -14,7 +14,7 @@ class Path(object):
     @property
     def rel(self):
         path = self.abs.replace(settings.packages_path(), '')
-        return 'Packages/' + path
+        return 'Packages' + path
 
 
 @functools.total_ordering
