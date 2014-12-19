@@ -21,13 +21,22 @@ def extract(archive_bytes, extract_path):
     _ensure_folder_exists(extract_path)
     with SpooledTemporaryFile() as temp:
         temp.write(archive_bytes)
-        with ZipFile(temp, mode='r') as data:
-            data.extractall(extract_path)
+        data = ZipFile(temp, mode='r')
+        data.extractall(extract_path)
+        data.close()
 
 
 def read_json(path):
-    with open(path, encoding='utf-8') as data:
-        return json.loads(data.read())
+    try:  # Python 3
+        with open(path, encoding='utf-8') as data:
+            return json.loads(data.read())
+    except TypeError:  # Python 2
+        import codecs
+        f = codecs.open(path, encoding='utf-8')
+        data = json.loads(f.read())
+        f.close()
+        return data
+
 
 
 def copy(from_path, to_path):

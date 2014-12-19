@@ -1,7 +1,7 @@
-'''
+"""
 Public API for the HTTP layer.
 By @blopker
-'''
+"""
 from .cache import cache
 from . import downloaders
 from .. import logger

@@ -1,4 +1,3 @@
-import functools
 from . import settings
 
 
@@ -17,7 +16,6 @@ class Path(object):
         return 'Packages' + path
 
 
-@functools.total_ordering
 class Theme(object):
     def __init__(self, name=None, author=None, description=None,
                  file_name=None):

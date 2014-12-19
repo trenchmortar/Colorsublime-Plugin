@@ -3,8 +3,8 @@ import sys
 
 import sublime_plugin
 
-from .colorsublime import commands
-from .colorsublime import status
+from colorsublime import commands
+from colorsublime import status
 
 NO_SELECTION = -1
 
@@ -12,7 +12,7 @@ NO_SELECTION = -1
 reloader_path = 'Colorsublime.colorsublime.reloader'
 if reloader_path in sys.modules:
     imp.reload(sys.modules[reloader_path])
-from .colorsublime import reloader
+from colorsublime import reloader
 reloader.reload()
 
 
@@ -21,7 +21,7 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
         print('Running install command.')
         self.theme_status = {}
         self.status = status.loading('Getting Theme list')
-        commands.fetch_repo(self.display_list)
+        self.display_list(commands.fetch_repo())
 
     def display_list(self, themes):
         self.status.stop()
@@ -40,9 +40,13 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
         quick_list.sort()
         self.quick_list = quick_list
 
-        self.window.show_quick_panel(quick_list,
-                                     self.on_done,
-                                     on_highlight=self.on_highlighted)
+        try:  # Python 3
+            self.window.show_quick_panel(quick_list,
+                                         self.on_done,
+                                         on_highlight=self.on_highlighted)
+        except Exception:  # Python 2
+            self.window.show_quick_panel(quick_list,
+                                         self.on_done)
 
     def on_highlighted(self, theme_index):
         commands.preview_theme(self._quick_list_to_theme(theme_index))

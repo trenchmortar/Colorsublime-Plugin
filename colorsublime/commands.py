@@ -23,14 +23,14 @@ def get_current_theme():
     return settings.get_current_theme()
 
 
-@async
+# @async
 def fetch_repo():
     """ Get current theme archive in a new thread """
     archive = http.get(settings.repo_url())
     io.extract(archive, settings.cache_path())
     themes_list = io.read_json(settings.themes_list_path())
     themes = [Theme.from_json(theme) for theme in themes_list]
-    themes = {t.name: t for t in themes}
+    themes = dict((t.name, t) for t in themes)
     return themes
 
 

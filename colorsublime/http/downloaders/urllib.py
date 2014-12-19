@@ -2,8 +2,12 @@ from .downloader_base import DownloaderBase
 from ... import logger
 log = logger.get(__name__)
 import traceback
-from urllib import request, error
 
+
+try:
+    from urllib import request
+except ImportError:
+    import urllib2 as request
 
 try:
     import ssl
@@ -26,7 +30,7 @@ class UrllibDownloader(DownloaderBase):
         try:
             log.debug('Urllib downloader getting url %s', url)
             result = request.urlopen(url)
-        except error.URLError as e:
+        except Exception as e:
             log.error('Urllib downloader failed: %s' % e.reason)
             traceback.print_exc()
             result = b''
