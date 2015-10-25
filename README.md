@@ -4,7 +4,7 @@
 
 Change themes quickly and easily, right from Sublime Text.
 
-Official [Colorsublime](http://colorsublime.com/) plugin.
+Official [Colorsublime](http://colorsublime.com/) plugin and a Top 100 Sublime Text plugin.
 
 Dedicated to [Kim](https://github.com/kimeberz) :heart:
 
