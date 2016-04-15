@@ -43,3 +43,7 @@ Functions
 ---------
 * Install: Installs/Previews themes from the Colorsublime repository.
 * Browse: Takes you to Colorsublime.com
+
+Windows Proxy Support
+---------------------
+In order to use a proxy in Windows set the environment variable `https_proxy` to `yourproxy.com:9999`.
