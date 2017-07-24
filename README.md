@@ -6,8 +6,6 @@ Change themes** quickly and easily, right from Sublime Text.
 
 Official [Colorsublime](http://colorsublime.com/) plugin and a Top 100 Sublime Text plugin.
 
-Dedicated to [Kim](https://github.com/kimeberz) :heart:
-
 ** **Please note:** All references to "Theme" in our instructions actually refer to what are now called "Color Schemes". This means that you are changing the color scheme of your coding windows within Sublime Text, not the user interface of the entire Sublime Text editor.  
 
 Requirements
