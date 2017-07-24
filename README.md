@@ -2,11 +2,13 @@
 
 ![gif](https://colorsublime.github.io/Colorsublime-Plugin/colorsublime.gif)
 
-Change themes quickly and easily, right from Sublime Text.
+Change themes** quickly and easily, right from Sublime Text.
 
 Official [Colorsublime](http://colorsublime.com/) plugin and a Top 100 Sublime Text plugin.
 
 Dedicated to [Kim](https://github.com/kimeberz) :heart:
+
+** **Please note:** All references to "Theme" in our instructions actually refer to what are now called "Color Schemes". This means that you are changing the color scheme of your coding windows within Sublime Text, not the user interface of the entire Sublime Text editor.  
 
 Requirements
 ------------
@@ -37,11 +39,11 @@ Usage
 -----
 1. Press `ctl+shift+p` (Windows/Linux) or `⇧+⌘+p` (OSX) to open up Sublime Text's command menu
 2. Select `Colorsublime: Install Theme`
-3. Use the arrow keys to run through the themes and see your current tab change in realtime!
+3. Use the arrow keys to run through the themes ("color schemes") and see your current tab change in realtime!
 
 Functions
 ---------
-* Install: Installs/Previews themes from the Colorsublime repository.
+* Install: Installs/Previews themes ("color schemes") from the Colorsublime repository.
 * Browse: Takes you to Colorsublime.com
 
 Windows Proxy Support
