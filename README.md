@@ -1,12 +1,12 @@
-![colorsublime](http://colorsublime.com/img/ColorSublime_logo.png)
+![colorsublime](https://colorsublime.github.io/assets/img/ColorSublime_logo.png)
 
 ![gif](https://colorsublime.github.io/Colorsublime-Plugin/colorsublime.gif)
 
 Change themes** quickly and easily, right from Sublime Text.
 
-Official [Colorsublime](http://colorsublime.com/) plugin and a Top 100 Sublime Text plugin.
+Official [Colorsublime](https://colorsublime.github.io/) plugin and a Top 100 Sublime Text plugin.
 
-** **Please note:** All references to "Theme" in our instructions actually refer to what are now called "Color Schemes". This means that you are changing the color scheme of your coding windows within Sublime Text, not the user interface of the entire Sublime Text editor.  
+** **Please note:** All references to "Theme" in our instructions actually refer to what are now called "Color Schemes". This means that you are changing the color scheme of your coding windows within Sublime Text, not the user interface of the entire Sublime Text editor.
 
 Requirements
 ------------
@@ -42,7 +42,7 @@ Usage
 Functions
 ---------
 * Install: Installs/Previews themes ("color schemes") from the Colorsublime repository.
-* Browse: Takes you to Colorsublime.com
+* Browse: Takes you to https://colorsublime.github.io/
 
 Windows Proxy Support
 ---------------------

@@ -63,4 +63,4 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
 
 class BrowseCommand(sublime_plugin.WindowCommand):
     def run(self):
-        self.window.run_command('open_url', {'url': 'http://colorsublime.com'})
+        self.window.run_command('open_url', {'url': 'https://colorsublime.github.io/'})
