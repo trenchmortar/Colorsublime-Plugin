@@ -43,6 +43,7 @@ Functions
 ---------
 * Install: Installs/Previews themes ("color schemes") from the Colorsublime repository.
 * Browse: Takes you to https://colorsublime.github.io/
+* Uninstall: Removes themes from the installed theme directory. Does not change your current theme.
 
 Windows Proxy Support
 ---------------------

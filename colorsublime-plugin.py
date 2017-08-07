@@ -5,6 +5,7 @@ import sublime_plugin
 
 from .colorsublime import commands
 from .colorsublime import status
+from .colorsublime import logger
 
 NO_SELECTION = -1
 
@@ -15,10 +16,12 @@ if reloader_path in sys.modules:
 from .colorsublime import reloader
 reloader.reload()
 
+log = logger.get(__name__)
+
 
 class InstallThemeCommand(sublime_plugin.WindowCommand):
     def run(self):
-        print('Running install command.')
+        log.info('Running install command.')
         self.theme_status = {}
         self.status = status.loading('Getting Theme list')
         commands.fetch_repo(self.display_list)
@@ -59,6 +62,22 @@ class InstallThemeCommand(sublime_plugin.WindowCommand):
 
     def _quick_list_to_theme(self, index):
         return self.themes[self.quick_list[index][0]]
+
+
+class UninstallThemeCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        log.info('Running uninstall command.')
+        self.installed_themes = commands.get_installed_themes()
+        if not self.installed_themes:
+            status.message('No themes installed.')
+            return
+        quick_list = [[theme.name] for theme in self.installed_themes]
+        self.window.show_quick_panel(quick_list, self.uninstall)
+
+    def uninstall(self, index):
+        theme = self.installed_themes[index]
+        commands.uninstall_theme(theme)
+        log.info('Uninstalled theme %s' % theme.name)
 
 
 class BrowseCommand(sublime_plugin.WindowCommand):

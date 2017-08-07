@@ -4,7 +4,11 @@
         "command": "install_theme"
     },
     {
-        "caption": "Colorsublime: Browse Themes",
+        "caption": "Colorsublime: Uninstall Theme",
+        "command": "uninstall_theme"
+    },
+    {
+        "caption": "Colorsublime: Browse Themes Online",
         "command": "browse"
     }
 ]

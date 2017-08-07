@@ -37,6 +37,6 @@ class Logger(object):
 
 
 def get(name):
-    ''' Get a new named logger. Usually called like: logger.get(__name__).Short
+    ''' Get a new named logger. Usually called like: logger.get(__name__). Short
     and sweet '''
     return Logger(name)

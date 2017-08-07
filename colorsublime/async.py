@@ -4,8 +4,8 @@ Decorator to run functions asynchronously.
 import traceback
 from .lib.concurrent import futures
 from . import logger
-log = logger.get(__name__)
 from . import settings
+log = logger.get(__name__)
 asyncPool = futures.ThreadPoolExecutor(max_workers=10)
 
 

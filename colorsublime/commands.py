@@ -11,16 +11,30 @@ All @async functions have an optional callback parameter as the last argument.
 import os
 
 from . import logger
-log = logger.get(__name__)
 from . import settings
 from . import http
 from . import io
 from .async import async
 from .theme import Theme
 
+log = logger.get(__name__)
+
 
 def get_current_theme():
     return settings.get_current_theme()
+
+
+def get_installed_themes():
+    theme_filenames = os.listdir(settings.install_path())
+    themes = []
+
+    for t in theme_filenames:
+        if t.endswith('.tmTheme'):
+            name = t.replace('.tmTheme', '')
+            themes.append(Theme(name=name, file_name=t))
+
+    themes.sort()
+    return themes
 
 
 @async
@@ -64,3 +78,7 @@ def install_theme(theme):
 def revert_theme(path):
     log.debug('Reverting theme at path %s', path)
     settings.set_theme(path)
+
+
+def uninstall_theme(theme):
+    os.remove(theme.install_path.abs)
